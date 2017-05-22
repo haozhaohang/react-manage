@@ -5,11 +5,13 @@ import { Provider } from 'react-redux';
 import { routerReducer, routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 import thunk from 'redux-thunk';
 
-import Manage from 'Containers/Manage';
-import User from 'Containers/Manage/User';
-import UserEdit from 'Containers/Manage/User/Edit';
-import Content from 'Containers/Manage/Content';
-import ContentEdit from 'Containers/Manage/Content/Edit';
+import LayoutMain from 'Containers/LayoutMain';
+import User from 'Containers/User';
+import UserEdit from 'Containers/User/Edit';
+import Label from 'Containers/Label';
+import LabelEdit from 'Containers/Label/Edit';
+import Content from 'Containers/Content';
+import ContentEdit from 'Containers/Content/Edit';
 
 import rootReducer from 'Reducers';
 
@@ -32,9 +34,11 @@ const App = () =>
     (
         <Provider store={store}>
             <Router history={history}>
-                <Route path="/" component={Manage}>
+                <Route path="/" component={LayoutMain}>
                     <IndexRoute component={User} />
                     <Route path="/user/edit" component={UserEdit} />
+                    <Route path="/label" component={Label} />
+                    <Route path="/label/edit" component={LabelEdit} />
                     <Route path="/content" component={Content} />
                     <Route path="/content/edit" component={ContentEdit} />
                 </Route>

@@ -7,7 +7,7 @@ import './index.styl';
 const { Header, Sider, Content } = Layout;
 const { Item: MenuItem } = Menu;
 
-class Manage extends Component {
+class LayoutMain extends Component {
     constructor(props) {
         super(props);
 
@@ -30,7 +30,7 @@ class Manage extends Component {
 
         const { children } = this.props;
         return (
-            <Layout className="manage-wrapper">
+            <Layout className="layout-wrapper">
                 <Sider
                     trigger={null}
                     collapsible
@@ -45,9 +45,9 @@ class Manage extends Component {
                             </Link>
                         </MenuItem>
                         <MenuItem key="2">
-                            <Link to="/content">
+                            <Link to="/label">
                                 <Icon type="video-camera" />
-                                <span className="nav-text">分类管理</span>
+                                <span className="nav-text">标签管理</span>
                             </Link>
                         </MenuItem>
                         <MenuItem key="3">
@@ -59,14 +59,14 @@ class Manage extends Component {
                     </Menu>
                 </Sider>
                 <Layout>
-                    <Header className="manage-header">
+                    <Header className="layout-header">
                         <Icon
                             className="trigger"
                             type={collapsed ? 'menu-unfold' : 'menu-fold'}
                             onClick={this.toggle}
                         />
                     </Header>
-                    <Content className="manage-containers">
+                    <Content className="layout-containers">
                         {children}
                     </Content>
                 </Layout>
@@ -75,12 +75,12 @@ class Manage extends Component {
     }
 }
 
-Manage.propTypes = {
+LayoutMain.propTypes = {
     children: PropTypes.node,
 };
 
-Manage.defaultProps = {
+LayoutMain.defaultProps = {
     children: [],
 };
 
-export default Manage;
+export default LayoutMain;
