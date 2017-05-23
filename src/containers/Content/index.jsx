@@ -35,10 +35,6 @@ class Content extends Component {
                 dataIndex: 'views',
             },
             {
-                title: '作者',
-                dataIndex: 'author1',
-            },
-            {
                 title: '类型',
                 dataIndex: 'classify',
             },

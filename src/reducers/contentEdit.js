@@ -3,6 +3,7 @@ import * as actionType from 'Constants/actionType';
 
 const initState = {
     info: {},
+    labelList: []
 }
 
 export default function contentEdit(state = initState, { type, payload }) {
@@ -11,7 +12,15 @@ export default function contentEdit(state = initState, { type, payload }) {
         const { data: { info } } = payload;
         return {
             ...state,
-            info
+            info,
+        };
+    }
+    case actionType.CONTENT_LABEL_LIST: {
+        const { data: { list } } = payload;
+
+        return {
+            ...state,
+            labelList: list,
         };
     }
     default:

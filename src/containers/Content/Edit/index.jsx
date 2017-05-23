@@ -30,12 +30,10 @@ class ContentEdit extends Component {
     }
 
     componentDidMount() {
-        const { id, fetchContentEdit } = this.props;
-        const params = {
-            id,
-        };
+        const { id, fetchContentEdit, fetchLabelList } = this.props;
 
-        fetchContentEdit(params);
+        fetchContentEdit({ id });
+        fetchLabelList();
     }
 
     async handleSubmint() {
@@ -67,7 +65,7 @@ class ContentEdit extends Component {
 
     render() {
         const { content } = this.state;
-        const { id, info, form: { getFieldDecorator } } = this.props;
+        const { id, info, labelList, form: { getFieldDecorator } } = this.props;
 
         const titleDecorator = getFieldDecorator('title', {
             initialValue: info.title,
@@ -83,7 +81,16 @@ class ContentEdit extends Component {
             ]
         });
 
-        const options = Object.entries(commons.CLASSIFY_LIST).map(([value, label]) => <Option value={value}>{label}</Option>);
+        const labelDecorator = getFieldDecorator('label', {
+            initialValue: info.label,
+            rules: [
+                { required: true, type: 'string', message: '标签为必填参数' }
+            ]
+        });
+
+        const classifyOptions = Object.entries(commons.CLASSIFY_LIST).map(([value, label]) => <Option key={value} value={value}>{label}</Option>);
+
+        const labelOptions = labelList.map(({ _id, name }) => <Option key={_id} value={_id}>{name}</Option>);
 
         return (
             <div className="content-edit-wrapper">
@@ -102,7 +109,15 @@ class ContentEdit extends Component {
                         <FormItem label="文章分类">
                             {classifyDecorator(
                                 <Select>
-                                    {options}
+                                    {classifyOptions}
+                                </Select>
+                            )}
+                        </FormItem>
+
+                        <FormItem label="标签">
+                            {labelDecorator(
+                                <Select>
+                                    {labelOptions}
                                 </Select>
                             )}
                         </FormItem>
@@ -124,12 +139,13 @@ class ContentEdit extends Component {
 }
 
 const mapStateToProps = ({ contentEdit }, { location: { query } }) => {
-    const { info } = contentEdit;
+    const { info, labelList } = contentEdit;
     const { id } = query;
 
     return {
         id,
         info,
+        labelList,
     };
 };
 
